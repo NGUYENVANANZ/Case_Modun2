@@ -42,16 +42,12 @@ public class DangNhapDangKy {
 
 
     public void Dang_Nhap() {
-        while (true) {
+
             System.out.println("==============(!LOGIN!)==================");
             System.out.println("Nhập userName :");
             String user = scanner.nextLine();
             System.out.println("Nhập passWord");
             String pass = scanner.nextLine();
-            if (user.equals("Admin") && pass.equals("123")) {
-                quanLyNet = new MenuQuan();
-                quanLyNet.Menu();
-            } else {
                 if (quanLyNguoiDung.checkNguoiDung(user, pass)) {
                     System.out.println("Đăng nhập thành công !");
                     menuNguoiDung.Menu(user, pass);
@@ -59,8 +55,6 @@ public class DangNhapDangKy {
                     System.out.println("Đăng nhập thất bại !");
                 }
 
-            }
-        }
     }
 
     public void Dang_Ky() {

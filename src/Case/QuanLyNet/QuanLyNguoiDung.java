@@ -2,7 +2,6 @@ package Case.QuanLyNet;
 
 import Case.DinhDangChuoi.DinhDang;
 import Case.IO.DocVietFileNhiPhan;
-import Case.Oject.DichVu;
 import Case.Oject.NguoiDUng;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ public class QuanLyNguoiDung {
     Scanner scanner = new Scanner(System.in);
     DocVietFileNhiPhan<NguoiDUng> docVietFile = new DocVietFileNhiPhan<>();
     DinhDang dinhDang = new DinhDang();
-     ArrayList<NguoiDUng> nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
+    ArrayList<NguoiDUng> nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
 
 
     public ArrayList<NguoiDUng> getNguoiDUngs() {
@@ -52,7 +51,7 @@ public class QuanLyNguoiDung {
             }
             switch (choice) {
                 case 1 -> Hien_Thi();
-                case 2 -> themNguoiDung();
+                case 2 -> Them();
                 case 3 -> NapTien();
                 case 4 -> Xoa();
             }
@@ -79,17 +78,19 @@ public class QuanLyNguoiDung {
         }
         int index = choice - 1;
         double tien_Trong_Tai_Khoan;
+        double tien_Nap;
         for (int i = 0; i < nguoiDUngs.size(); i++) {
             if (i == index) {
                 System.out.println("Nạp vào :");
                 while (true) {
                     try {
-                        tien_Trong_Tai_Khoan = Double.parseDouble(scanner.nextLine());
+                        tien_Nap = Double.parseDouble(scanner.nextLine());
                         break;
                     } catch (NumberFormatException e) {
                         System.out.println("Vui lòng nhập số");
                     }
                 }
+                tien_Trong_Tai_Khoan = tien_Nap + nguoiDUngs.get(i).getTien_Trong_Tai_Khoan();
                 nguoiDUngs.get(i).setTien_Trong_Tai_Khoan(tien_Trong_Tai_Khoan);
             }
         }
@@ -133,27 +134,52 @@ public class QuanLyNguoiDung {
         }
     }
 
-    public void themNguoiDung() {
-        System.out.println("Nhập userName :");
+    public void Them() {
         String user;
         do {
-           user = scanner.nextLine();
-           user = dinhDang.DinhDang_KyUser(user);
-           if (user == null || XetTrungTaiKhoan(user) == -1){
-               System.out.println("Nhập lại !");
-           }
-        }while (user == null);
-
-
-        System.out.println("Nhập passWord");
-        String pass;
-        do {
-            pass = scanner.nextLine();
-            pass = dinhDang.DinhDang_KyPass(pass);
-            if (pass == null){
+            System.out.println("Nhập userName :");
+            user = scanner.nextLine();
+            user = dinhDang.DinhDang_KyUser(user);
+            if (user == null || XetTrungTaiKhoan(user) == -1) {
                 System.out.println("Nhập lại !");
             }
-        }while (pass == null);
+        } while (user == null || XetTrungTaiKhoan(user) == -1);
+
+        String pass;
+        do {
+            System.out.println("Nhập passWord");
+            pass = scanner.nextLine();
+            pass = dinhDang.DinhDang_KyPass(pass);
+            if (pass == null) {
+                System.out.println("Nhập lại !");
+            }
+        } while (pass == null);
+        NguoiDUng nguoiDUng = new NguoiDUng(user, pass, 1000);
+        nguoiDUngs.add(nguoiDUng);
+        docVietFile.write(nguoiDUngs, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
+    }
+
+    public void themNguoiDung() {
+
+        String user;
+        do {
+            System.out.println("Nhập userName :");
+            user = scanner.nextLine();
+            user = dinhDang.DinhDang_KyUser(user);
+            if (user == null || XetTrungTaiKhoan(user) == -1) {
+                System.out.println("Nhập lại !");
+            }
+        } while (user == null || XetTrungTaiKhoan(user) == -1);
+
+        String pass;
+        do {
+            System.out.println("Nhập passWord");
+            pass = scanner.nextLine();
+            pass = dinhDang.DinhDang_KyPass(pass);
+            if (pass == null) {
+                System.out.println("Nhập lại !");
+            }
+        } while (pass == null);
         boolean check = true;
         while (check) {
             System.out.println("Xác nhận passWord");
@@ -203,20 +229,13 @@ public class QuanLyNguoiDung {
         docVietFile.write(nguoiDUngs, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
     }
 
-    public void HienThiThongTin(String user, String pass){
-        for (NguoiDUng x:nguoiDUngs) {
-            if (x.getTen_Dang_Nhap().equals(user) && x.getMat_Khau().equals(pass)){
-                System.out.println(x);
-            }
-        }
-    }
 
-    public int XetTrungTaiKhoan(String name){
+    public int XetTrungTaiKhoan(String name) {
         for (NguoiDUng x : nguoiDUngs) {
             if (x.getTen_Dang_Nhap().equals(name)) {
-                return 1;
+                return -1;
             }
         }
-        return -1;
+        return 1;
     }
 }

@@ -1,6 +1,8 @@
 package Case.QuanLyNet;
 
+import Case.DangNhap_DangKy.DangNhapAdmin;
 import Case.DangNhap_DangKy.DangNhapDangKy;
+import Case.QuanLyNguoiDung.XuatHoaDon;
 
 import java.util.Scanner;
 
@@ -12,6 +14,7 @@ public class MenuQuan {
     QuanLyNguoiDung quanLyNguoiDung = new QuanLyNguoiDung();
 
     XuatHoaDon xuatHoaDon = new XuatHoaDon();
+
 
 
     public void Menu() {
@@ -37,11 +40,10 @@ public class MenuQuan {
                 case 1 -> quanLyDoAn.show_Do_An();
                 case 2 -> quanLyNguoiDung.show_Nguoi_Dung();
                 case 3 -> xuatHoaDon.TongTien();
-                case 4 -> DangNhapDangKy.dangNhapDangKy.luaChon();
+                case 4 -> DangNhapAdmin.dangNhapAdmin.Dang_Nhap();
             }
+            choice = 0;
         }
 
     }
-
-
 }

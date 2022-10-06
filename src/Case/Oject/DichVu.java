@@ -32,6 +32,6 @@ public class DichVu implements Serializable {
 
     @Override
     public String toString() {
-        return "Tên Món: "+ Ten_Mon_An + "\t" + "Giá :" +Gia;
+        return "Tên Món: "+ Ten_Mon_An + "\t" + "Giá :" +Gia + "\n";
     }
 }

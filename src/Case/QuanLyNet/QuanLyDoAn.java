@@ -11,6 +11,9 @@ public class QuanLyDoAn {
     DocVietFileNhiPhan<DichVu> docVietFile = new DocVietFileNhiPhan<>();
     ArrayList<DichVu> do_an_quan_nets = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
 
+
+
+
     public ArrayList<DichVu> getDo_an_quan_nets() {
         return do_an_quan_nets;
     }
@@ -27,7 +30,7 @@ public class QuanLyDoAn {
 
     public void ChucNang() {
         int choice = 0;
-        while (choice != 4) {
+        while (choice != 5) {
             System.out.println("""
                     ==========================================
                     1. Xem Menu
@@ -53,6 +56,7 @@ public class QuanLyDoAn {
                 case 2 -> Them();
                 case 3 -> Sua();
                 case 4 -> Xoa();
+
             }
         }
 
@@ -168,6 +172,4 @@ public class QuanLyDoAn {
         }
         return -1;
     }
-
-
 }
