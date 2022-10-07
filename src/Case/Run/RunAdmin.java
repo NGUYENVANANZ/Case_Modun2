@@ -28,11 +28,11 @@ public class RunAdmin extends Thread{
     static {
         try {
             socket = sever.accept();
+            System.out.println("Khách vùa đăng nhập!");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     @Override
     public void run() {
         try {
@@ -61,7 +61,6 @@ public class RunAdmin extends Thread{
         ps.println("Chủ Quán : " + inbox);
     }
 
-    public static NguoiDUng admin = new NguoiDUng();
     public static void main(String[] args) {
         DangNhapAdmin dangNhapAdmin = new DangNhapAdmin();
         RunAdmin runAdmin = new RunAdmin();

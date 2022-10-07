@@ -20,6 +20,7 @@ public class QuanLyNguoiDung {
     }
 
     public void show_Nguoi_Dung() {
+        nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
         Hien_Thi();
         System.out.println("Bạn Muốn Thay Đổi Gì Không? ");
         System.out.println("Nhấn y để thay đổi !");
@@ -62,6 +63,7 @@ public class QuanLyNguoiDung {
     }
 
     private void NapTien() {
+        nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
         int choice;
         System.out.println("Chọn tài khoản muốn nạp? \n (Nhập Số thứ tự tài khoản)");
 
@@ -101,6 +103,7 @@ public class QuanLyNguoiDung {
     }
 
     private void Xoa() {
+        nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
         int choice;
         System.out.println("Bạn muốn xóa tài khoản nào?");
         while (true) {
@@ -138,6 +141,7 @@ public class QuanLyNguoiDung {
     }
 
     public void Them() {
+        nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
         String user;
         do {
             System.out.println("Nhập userName :");
@@ -163,6 +167,7 @@ public class QuanLyNguoiDung {
     }
 
     public void themNguoiDung() {
+        nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
 
         String user;
         do {
@@ -210,7 +215,7 @@ public class QuanLyNguoiDung {
     }
 
     public void DoiMatKhau(String user, String pass, String newpass) {
-
+        nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
         for (int i = 0; i < nguoiDUngs.size(); i++) {
             if (nguoiDUngs.get(i).getTen_Dang_Nhap().equals(user) && nguoiDUngs.get(i).getMat_Khau().equals(pass)) {
                 NguoiDUng nguoiDUng = new NguoiDUng(user, newpass, nguoiDUngs.get(i).getTien_Trong_Tai_Khoan());
@@ -223,6 +228,7 @@ public class QuanLyNguoiDung {
     }
 
     public void TruTien(String user, String pass, double sum) {
+        nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
         for (NguoiDUng x : nguoiDUngs) {
             if (x.getTen_Dang_Nhap().equals(user) && x.getMat_Khau().equals(pass)) {
                 double Tien_Trong_Tai_Khoan = x.getTien_Trong_Tai_Khoan() - sum;

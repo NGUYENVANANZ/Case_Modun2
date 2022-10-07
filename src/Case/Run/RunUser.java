@@ -15,10 +15,11 @@ public class RunUser extends Thread{
 
     public static NguoiDUng user = new NguoiDUng();
 
-    static MenuNguoiDung menuNguoiDung = new MenuNguoiDung();
+    static DangNhapDangKy dangNhapDangKy = new DangNhapDangKy();
+
     @Override
     public void run() {
-        Socket socket = menuNguoiDung.getSocket();
+        Socket socket = dangNhapDangKy.getSocket();
         BufferedReader br = null;
         while (true) {
             try {
@@ -38,7 +39,7 @@ public class RunUser extends Thread{
     }
 
     public static void main(String[] args) {
-        menuNguoiDung.start();
+        dangNhapDangKy.start();
         RunUser runUser = new RunUser();
         runUser.start();
     }

@@ -27,6 +27,7 @@ public class XuatHoaDon {
 
 
     public void MuaDoAn() {
+        hoaDons = hoaDonDocVietFileNhiPhan.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
         boolean check = true;
         ArrayList<DichVu> dichVus = new ArrayList<>();
         DichVu dichVu;
@@ -79,6 +80,7 @@ public class XuatHoaDon {
 
     }
     public void TongTien(){
+        hoaDons = hoaDonDocVietFileNhiPhan.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
         double sum = TinhTienMay();
         for (HoaDon x:hoaDons) {
             sum += x.Tongtien();

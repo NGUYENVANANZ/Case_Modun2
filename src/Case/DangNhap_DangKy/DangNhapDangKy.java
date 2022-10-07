@@ -12,23 +12,14 @@ import java.util.Scanner;
 
 public class DangNhapDangKy extends Thread {
     Scanner scanner = new Scanner(System.in);
-    MenuQuan quanLyNet;
 
-    MenuNguoiDung menuNguoiDung = new MenuNguoiDung();
+    static MenuNguoiDung menuNguoiDung = new MenuNguoiDung();
     QuanLyNguoiDung quanLyNguoiDung = new QuanLyNguoiDung();
 
-    Socket socket;
 
-    {
-        try {
-            socket = new Socket("localhost", 2006);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Socket getSocket() {
+        return menuNguoiDung.getSocket();
     }
-
-
-
     @Override
     public void run() {
         luaChon();
@@ -79,8 +70,6 @@ public class DangNhapDangKy extends Thread {
                 } else {
                     System.out.println("Đăng nhập thất bại !");
                 }
-
-
     }
 
     public void Dang_Ky() {

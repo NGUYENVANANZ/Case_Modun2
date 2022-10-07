@@ -22,6 +22,7 @@ public class QuanLyDoAn {
     }
 
     public void show_Do_An() {
+        do_an_quan_nets = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
         Hien_Thi();
         System.out.println("Bạn Muốn Thay Đổi Gì Không?");
         System.out.println("Nhấn y để thay đổi !");
@@ -66,6 +67,7 @@ public class QuanLyDoAn {
     }
 
     public void Them() {
+        do_an_quan_nets = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
         double gia;
         String tenMon;
         System.out.println("Nhập Món");
@@ -92,6 +94,7 @@ public class QuanLyDoAn {
     }
 
     public void Sua() {
+        do_an_quan_nets = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
         int choice;
         System.out.println("Bạn muốn sửa món?");
         while (true) {
@@ -133,6 +136,7 @@ public class QuanLyDoAn {
     }
 
     public void Xoa() {
+        do_an_quan_nets = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
         int choice;
         System.out.println("Bạn muốn bỏ món?");
         while (true) {
@@ -159,6 +163,7 @@ public class QuanLyDoAn {
     }
 
     public void Hien_Thi() {
+        do_an_quan_nets = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
         int i = 1;
         for (DichVu x : do_an_quan_nets) {
             System.out.println(i + ":" + x);
@@ -168,6 +173,7 @@ public class QuanLyDoAn {
     }
 
     public int XetTrungSanPham(String name){
+        do_an_quan_nets = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
         for (DichVu x : do_an_quan_nets) {
             if (x.getTen_Mon_An().equals(name)) {
                 return -1;

@@ -2,6 +2,7 @@ package Case.QuanLyNguoiDung;
 
 import Case.DangNhap_DangKy.DangNhapDangKy;
 import Case.DinhDangChuoi.DinhDang;
+import Case.IO.DocVietFileNhiPhan;
 import Case.Oject.NguoiDUng;
 import Case.QuanLyNet.QuanLyNguoiDung;
 import Case.Run.RunUser;
@@ -11,9 +12,10 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class MenuNguoiDung extends Thread {
+public class MenuNguoiDung extends Thread{
     Scanner scanner = new Scanner(System.in);
     QuanLyNguoiDung quanLyNguoiDung = new QuanLyNguoiDung();
+
 
     XuatHoaDon xuatHoaDon = new XuatHoaDon();
     DinhDang dinhDang = new DinhDang();
@@ -27,6 +29,7 @@ public class MenuNguoiDung extends Thread {
             e.printStackTrace();
         }
     }
+
     public Socket getSocket() {
         return socket;
     }
@@ -48,6 +51,7 @@ public class MenuNguoiDung extends Thread {
         inbox = scanner.nextLine();
         ps.println("Khách : " + inbox);
     }
+
     public static MenuNguoiDung menuNguoiDung;
 
     public void Menu() {
