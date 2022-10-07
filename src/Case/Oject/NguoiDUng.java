@@ -10,6 +10,7 @@ public class NguoiDUng implements Serializable {
 
     public NguoiDUng() {
     }
+
 //    public NguoiDUng(String ten_Dang_Nhap, String mat_Khau) {
 //        this.ten_Dang_Nhap = ten_Dang_Nhap;
 //        this.mat_Khau = mat_Khau;

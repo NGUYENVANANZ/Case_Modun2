@@ -19,21 +19,30 @@ public class XuatHoaDon {
     QuanLyDoAn quanLyDoAn = new QuanLyDoAn();
     QuanLyNguoiDung quanLyNguoiDung = new QuanLyNguoiDung();
     DinhDang dinhDang = new DinhDang();
+
+
    DocVietFileNhiPhan<HoaDon> hoaDonDocVietFileNhiPhan = new DocVietFileNhiPhan<>();
     ArrayList<HoaDon> hoaDons = hoaDonDocVietFileNhiPhan.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
+
+
 
     public void MuaDoAn() {
         boolean check = true;
         ArrayList<DichVu> dichVus = new ArrayList<>();
         DichVu dichVu;
         int soluong = 0;
-        int choice;
+        int choice = 0;
         while (check){
             quanLyDoAn.Hien_Thi();
             System.out.println("Bạn muốn mua món ?" + "\n" + "(Nhập số thứ tự để mua :#)");
             while (true) {
+
                 try {
                     choice = Integer.parseInt(scanner.nextLine());
+                    if (choice == 0){
+                        MenuNguoiDung.menuNguoiDung = new MenuNguoiDung();
+                        MenuNguoiDung.menuNguoiDung.Menu();
+                    }
                     if (choice > 0 && choice <= quanLyDoAn.getDo_an_quan_nets().size()+1) {
                         dichVu = new DichVu(quanLyDoAn.getDo_an_quan_nets().get(choice-1).getTen_Mon_An(), quanLyDoAn.getDo_an_quan_nets().get(choice-1).getGia());
                         dichVus.add(dichVu);
@@ -54,7 +63,8 @@ public class XuatHoaDon {
                     System.out.println("Vui lòng nhập số");
                 }
             }
-            System.out.println("Bạn muốn gọi thêm món khác không ? y/n");
+            System.out.println("Bạn muốn gọi thêm món khác không ?");
+            System.out.println("Nhấn y để thay đổi !");
             String x = scanner.nextLine();
 
             if (dinhDang.Yes_or_No(x)) {
@@ -76,6 +86,7 @@ public class XuatHoaDon {
         System.out.println("Tổng doanh thu :" + sum);
     }
     public double TinhTienMay(){
+        quanLyNguoiDung = new QuanLyNguoiDung();
         double sum = 0;
         for (NguoiDUng x: quanLyNguoiDung.getNguoiDUngs()) {
             sum += x.getTien_Trong_Tai_Khoan();

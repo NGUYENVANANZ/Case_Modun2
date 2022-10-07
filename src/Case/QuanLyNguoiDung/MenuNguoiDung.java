@@ -16,6 +16,8 @@ public class MenuNguoiDung {
     XuatHoaDon xuatHoaDon = new XuatHoaDon();
     DinhDang dinhDang = new DinhDang();
 
+    public static MenuNguoiDung menuNguoiDung;
+
     public void Menu() {
         int choice = 0;
         while (true) {
@@ -46,6 +48,7 @@ public class MenuNguoiDung {
     }
 
     private void ThongTin() {
+        quanLyNguoiDung = new QuanLyNguoiDung();
         for (NguoiDUng x : quanLyNguoiDung.getNguoiDUngs()) {
             if (x.getTen_Dang_Nhap().equals(Run.user.getTen_Dang_Nhap()) && x.getMat_Khau().equals(Run.user.getMat_Khau())) {
                 System.out.println(x);

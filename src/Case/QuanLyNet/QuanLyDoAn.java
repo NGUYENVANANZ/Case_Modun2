@@ -23,7 +23,8 @@ public class QuanLyDoAn {
 
     public void show_Do_An() {
         Hien_Thi();
-        System.out.println("Bạn Muốn Thay Đổi Gì Không? y/n");
+        System.out.println("Bạn Muốn Thay Đổi Gì Không?");
+        System.out.println("Nhấn y để thay đổi !");
         String choice = scanner.nextLine();
         if (!dinhDang.Yes_or_No(choice)) {
             ChucNang();
@@ -169,9 +170,9 @@ public class QuanLyDoAn {
     public int XetTrungSanPham(String name){
         for (DichVu x : do_an_quan_nets) {
             if (x.getTen_Mon_An().equals(name)) {
-                return 1;
+                return -1;
             }
         }
-        return -1;
+        return 1;
     }
 }

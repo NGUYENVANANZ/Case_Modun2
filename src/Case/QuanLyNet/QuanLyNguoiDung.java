@@ -21,7 +21,8 @@ public class QuanLyNguoiDung {
 
     public void show_Nguoi_Dung() {
         Hien_Thi();
-        System.out.println("Bạn Muốn Thay Đổi Gì Không? y/n ");
+        System.out.println("Bạn Muốn Thay Đổi Gì Không? ");
+        System.out.println("Nhấn y để thay đổi !");
         String choice = scanner.nextLine();
         if (!dinhDang.Yes_or_No(choice)) {
             ChucNang();
