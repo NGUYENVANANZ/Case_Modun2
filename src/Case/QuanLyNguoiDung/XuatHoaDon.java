@@ -7,7 +7,7 @@ import Case.Oject.HoaDon;
 import Case.Oject.NguoiDUng;
 import Case.QuanLyNet.QuanLyDoAn;
 import Case.QuanLyNet.QuanLyNguoiDung;
-import Case.Run.Run;
+import Case.Run.RunUser;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -71,11 +71,11 @@ public class XuatHoaDon {
                 check = false;
             }
         }
-        HoaDon hoaDon = new HoaDon(LocalDateTime.now(),dichVus, soluong, Run.user.getTen_Dang_Nhap());
+        HoaDon hoaDon = new HoaDon(LocalDateTime.now(),dichVus, soluong, RunUser.user.getTen_Dang_Nhap());
         System.out.println(hoaDon);
         hoaDons.add(hoaDon);
         hoaDonDocVietFileNhiPhan.write(hoaDons,"C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
-        quanLyNguoiDung.TruTien(Run.user.getTen_Dang_Nhap(), Run.user.getMat_Khau(), hoaDon.Tongtien());
+        quanLyNguoiDung.TruTien(RunUser.user.getTen_Dang_Nhap(), RunUser.user.getMat_Khau(), hoaDon.Tongtien());
 
     }
     public void TongTien(){

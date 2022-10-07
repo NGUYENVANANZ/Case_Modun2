@@ -3,7 +3,7 @@ package Case.QuanLyNet;
 import Case.DinhDangChuoi.DinhDang;
 import Case.IO.DocVietFileNhiPhan;
 import Case.Oject.NguoiDUng;
-import Case.Run.Run;
+import Case.Run.RunUser;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -129,6 +129,7 @@ public class QuanLyNguoiDung {
 
 
     public void Hien_Thi() {
+        nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
         int i = 1;
         for (NguoiDUng x : nguoiDUngs) {
             System.out.println(i + ":" + x);
@@ -199,6 +200,7 @@ public class QuanLyNguoiDung {
     }
 
     public boolean checkNguoiDung(String user, String pass) {
+        nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
         for (NguoiDUng x : nguoiDUngs) {
             if (x.getTen_Dang_Nhap().equals(user) && x.getMat_Khau().equals(pass)) {
                 return true;
@@ -213,7 +215,7 @@ public class QuanLyNguoiDung {
             if (nguoiDUngs.get(i).getTen_Dang_Nhap().equals(user) && nguoiDUngs.get(i).getMat_Khau().equals(pass)) {
                 NguoiDUng nguoiDUng = new NguoiDUng(user, newpass, nguoiDUngs.get(i).getTien_Trong_Tai_Khoan());
                 nguoiDUngs.set(i, nguoiDUng);
-                Run.user = nguoiDUng;
+                RunUser.user = nguoiDUng;
             }
         }
 

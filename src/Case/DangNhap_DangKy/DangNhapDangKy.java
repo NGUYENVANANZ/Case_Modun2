@@ -1,20 +1,38 @@
 package Case.DangNhap_DangKy;
 
-import Case.Oject.NguoiDUng;
 import Case.QuanLyNet.MenuQuan;
 import Case.QuanLyNet.QuanLyNguoiDung;
 import Case.QuanLyNguoiDung.MenuNguoiDung;
-import Case.Run.Run;
+import Case.Run.RunUser;
 
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
 import java.util.Scanner;
 
-public class DangNhapDangKy {
+public class DangNhapDangKy extends Thread {
     Scanner scanner = new Scanner(System.in);
     MenuQuan quanLyNet;
 
     MenuNguoiDung menuNguoiDung = new MenuNguoiDung();
     QuanLyNguoiDung quanLyNguoiDung = new QuanLyNguoiDung();
-    public static DangNhapDangKy dangNhapDangKy;
+
+    Socket socket;
+
+    {
+        try {
+            socket = new Socket("localhost", 2006);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    @Override
+    public void run() {
+        luaChon();
+    }
 
     public void luaChon() {
         while (true){
@@ -47,25 +65,21 @@ public class DangNhapDangKy {
 
 
     public void Dang_Nhap() {
-
         System.out.println("==============(!LOGIN!)==================");
             System.out.println("Nhập userName :");
             String username = scanner.nextLine();
             System.out.println("Nhập passWord");
             String pass = scanner.nextLine();
-            if (username.equals("Admin") && pass.equals("123")) {
-                quanLyNet = new MenuQuan();
-                quanLyNet.Menu();
-            }else {
+
                 if (quanLyNguoiDung.checkNguoiDung(username, pass)) {
                     System.out.println("Đăng nhập thành công !");
-                    Run.user.setTen_Dang_Nhap(username);
-                    Run.user.setMat_Khau(pass);
+                    RunUser.user.setTen_Dang_Nhap(username);
+                    RunUser.user.setMat_Khau(pass);
                     menuNguoiDung.Menu();
                 } else {
                     System.out.println("Đăng nhập thất bại !");
                 }
-            }
+
 
     }
 

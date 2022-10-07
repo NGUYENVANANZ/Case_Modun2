@@ -1,7 +1,7 @@
 package Case.QuanLyNet;
 
-import Case.DangNhap_DangKy.DangNhapDangKy;
 import Case.QuanLyNguoiDung.XuatHoaDon;
+import Case.Run.RunAdmin;
 
 import java.util.Scanner;
 
@@ -14,22 +14,28 @@ public class MenuQuan {
 
     XuatHoaDon xuatHoaDon = new XuatHoaDon();
 
+    RunAdmin runAdmin = new RunAdmin();
+
 
 
     public void Menu() {
         int choice = 0;
-        while (true) {
+        while (choice != 5) {
             System.out.println("""
                     ==================(Xin Chào AdMin)==================
                     1. Quản lý Đồ Ăn
                     2. Quản lý Người Sử Dụng
                     3. Xem Doanh Thu
-                    4. Đăng xuất
+                    4.Chat
+                    5. Đăng xuất
                     =====================================================""");
-            while (choice > 4 || choice < 1)
+            while (choice > 5 || choice < 1)
                 try {
                     choice = Integer.parseInt(scanner.nextLine());
-                    if (choice > 4 || choice < 1) {
+                    if (choice == 5) {
+                        return;
+                    }
+                    if (choice > 5 || choice < 1) {
                         System.out.println("Vui lòng chọn từ 1 -> 4");
                     }
                 } catch (NumberFormatException e) {
@@ -39,7 +45,7 @@ public class MenuQuan {
                 case 1 -> quanLyDoAn.show_Do_An();
                 case 2 -> quanLyNguoiDung.show_Nguoi_Dung();
                 case 3 -> xuatHoaDon.TongTien();
-                case 4 -> DangNhapDangKy.dangNhapDangKy.luaChon();
+                case 4 -> runAdmin.handleChat();
             }
             choice = 0;
         }
