@@ -3,6 +3,7 @@ package Case.QuanLyNet;
 import Case.DinhDangChuoi.DinhDang;
 import Case.IO.DocVietFileNhiPhan;
 import Case.Oject.NguoiDUng;
+import Case.Run.Run;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,7 +23,7 @@ public class QuanLyNguoiDung {
         Hien_Thi();
         System.out.println("Bạn Muốn Thay Đổi Gì Không? y/n ");
         String choice = scanner.nextLine();
-        if (choice.equals("y")) {
+        if (!dinhDang.Yes_or_No(choice)) {
             ChucNang();
         }
     }
@@ -61,7 +62,7 @@ public class QuanLyNguoiDung {
 
     private void NapTien() {
         int choice;
-        System.out.println("Chọn tài khoản muốn nạp?");
+        System.out.println("Chọn tài khoản muốn nạp? \n (Nhập Số thứ tự tài khoản)");
 
         while (true) {
             try {
@@ -166,7 +167,7 @@ public class QuanLyNguoiDung {
             System.out.println("Nhập userName :");
             user = scanner.nextLine();
             user = dinhDang.DinhDang_KyUser(user);
-            if (user == null || XetTrungTaiKhoan(user) == -1) {
+            if (user == null) {
                 System.out.println("Nhập lại !");
             }
         } while (user == null || XetTrungTaiKhoan(user) == -1);
@@ -206,11 +207,15 @@ public class QuanLyNguoiDung {
     }
 
     public void DoiMatKhau(String user, String pass, String newpass) {
-        for (NguoiDUng x : nguoiDUngs) {
-            if (x.getTen_Dang_Nhap().equals(user) && x.getMat_Khau().equals(pass)) {
-                x.setMat_Khau(newpass);
+
+        for (int i = 0; i < nguoiDUngs.size(); i++) {
+            if (nguoiDUngs.get(i).getTen_Dang_Nhap().equals(user) && nguoiDUngs.get(i).getMat_Khau().equals(pass)) {
+                NguoiDUng nguoiDUng = new NguoiDUng(user, newpass, nguoiDUngs.get(i).getTien_Trong_Tai_Khoan());
+                nguoiDUngs.set(i, nguoiDUng);
+                Run.user = nguoiDUng;
             }
         }
+
         docVietFile.write(nguoiDUngs, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
     }
 
@@ -233,6 +238,7 @@ public class QuanLyNguoiDung {
     public int XetTrungTaiKhoan(String name) {
         for (NguoiDUng x : nguoiDUngs) {
             if (x.getTen_Dang_Nhap().equals(name)) {
+                System.out.println("Tài khoản đã tồn tại");
                 return -1;
             }
         }

@@ -1,8 +1,10 @@
 package Case.DangNhap_DangKy;
 
+import Case.Oject.NguoiDUng;
 import Case.QuanLyNet.MenuQuan;
 import Case.QuanLyNet.QuanLyNguoiDung;
 import Case.QuanLyNguoiDung.MenuNguoiDung;
+import Case.Run.Run;
 
 import java.util.Scanner;
 
@@ -43,18 +45,26 @@ public class DangNhapDangKy {
 
     public void Dang_Nhap() {
 
-            System.out.println("==============(!LOGIN!)==================");
+        System.out.println("==============(!LOGIN!)==================");
+        while (true){
             System.out.println("Nhập userName :");
-            String user = scanner.nextLine();
+            String username = scanner.nextLine();
             System.out.println("Nhập passWord");
             String pass = scanner.nextLine();
-                if (quanLyNguoiDung.checkNguoiDung(user, pass)) {
+            if (username.equals("Admin") && pass.equals("123")) {
+                quanLyNet = new MenuQuan();
+                quanLyNet.Menu();
+            }else {
+                if (quanLyNguoiDung.checkNguoiDung(username, pass)) {
                     System.out.println("Đăng nhập thành công !");
-                    menuNguoiDung.Menu(user, pass);
+                    Run.user.setTen_Dang_Nhap(username);
+                    Run.user.setMat_Khau(pass);
+                    menuNguoiDung.Menu();
                 } else {
                     System.out.println("Đăng nhập thất bại !");
                 }
-
+            }
+        }
     }
 
     public void Dang_Ky() {

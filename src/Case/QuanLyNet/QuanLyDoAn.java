@@ -1,5 +1,6 @@
 package Case.QuanLyNet;
 
+import Case.DinhDangChuoi.DinhDang;
 import Case.IO.DocVietFileNhiPhan;
 import Case.Oject.DichVu;
 
@@ -9,6 +10,8 @@ import java.util.Scanner;
 public class QuanLyDoAn {
     Scanner scanner = new Scanner(System.in);
     DocVietFileNhiPhan<DichVu> docVietFile = new DocVietFileNhiPhan<>();
+
+    DinhDang dinhDang = new DinhDang();
     ArrayList<DichVu> do_an_quan_nets = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
 
 
@@ -20,10 +23,9 @@ public class QuanLyDoAn {
 
     public void show_Do_An() {
         Hien_Thi();
-        System.out.println("Bạn Muốn Thay Đổi Gì Không?");
-        System.out.println("Nhấp 'y' để thực hiện thay đổi");
+        System.out.println("Bạn Muốn Thay Đổi Gì Không? y/n");
         String choice = scanner.nextLine();
-        if (choice.equals("y")) {
+        if (!dinhDang.Yes_or_No(choice)) {
             ChucNang();
         }
     }

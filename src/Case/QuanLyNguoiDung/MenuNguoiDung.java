@@ -5,6 +5,7 @@ import Case.DangNhap_DangKy.DangNhapDangKy;
 import Case.DinhDangChuoi.DinhDang;
 import Case.Oject.NguoiDUng;
 import Case.QuanLyNet.QuanLyNguoiDung;
+import Case.Run.Run;
 
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class MenuNguoiDung {
     XuatHoaDon xuatHoaDon = new XuatHoaDon();
     DinhDang dinhDang = new DinhDang();
 
-    public void Menu(String user, String pass) {
+    public void Menu() {
         int choice = 0;
         while (true) {
             System.out.println("""
@@ -35,29 +36,29 @@ public class MenuNguoiDung {
                     System.out.println("Vui lòng nhập số");
                 }
             switch (choice) {
-                case 1 -> xuatHoaDon.MuaDoAn(user, pass);
-                case 2 -> DoiMatKhau(user);
-                case 3 -> ThongTin(user, pass);
+                case 1 -> xuatHoaDon.MuaDoAn();
+                case 2 -> DoiMatKhau();
+                case 3 -> ThongTin();
                 case 4 -> DangNhapDangKy.dangNhapDangKy.luaChon();
             }
             choice = 0;
         }
     }
 
-    private void ThongTin(String user, String pass) {
+    private void ThongTin() {
         for (NguoiDUng x : quanLyNguoiDung.getNguoiDUngs()) {
-            if (x.getTen_Dang_Nhap().equals(user) && x.getMat_Khau().equals(pass)) {
+            if (x.getTen_Dang_Nhap().equals(Run.user.getTen_Dang_Nhap()) && x.getMat_Khau().equals(Run.user.getMat_Khau())) {
                 System.out.println(x);
             }
         }
 
     }
 
-    private void DoiMatKhau(String user) {
+    private void DoiMatKhau() {
         System.out.println("Nhập mật khẩu cũ");
         String pass = scanner.nextLine();
         String newPass = "";
-        if (quanLyNguoiDung.checkNguoiDung(user, pass)) {
+        if (quanLyNguoiDung.checkNguoiDung(Run.user.getTen_Dang_Nhap(), pass)) {
             do {
                 System.out.println("Nhập mật khẩu mới");
                 newPass = scanner.nextLine();
@@ -66,7 +67,9 @@ public class MenuNguoiDung {
                     System.out.println("Nhập lại !");
                 }
             } while (pass == null);
-            quanLyNguoiDung.DoiMatKhau(user, pass, newPass);
+            quanLyNguoiDung.DoiMatKhau(Run.user.getTen_Dang_Nhap(), pass, newPass);
+        }else {
+            System.out.println("Sai mật khẩu");
         }
     }
 

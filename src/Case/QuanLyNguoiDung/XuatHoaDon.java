@@ -1,11 +1,13 @@
 package Case.QuanLyNguoiDung;
 
+import Case.DinhDangChuoi.DinhDang;
 import Case.IO.DocVietFileNhiPhan;
 import Case.Oject.DichVu;
 import Case.Oject.HoaDon;
 import Case.Oject.NguoiDUng;
 import Case.QuanLyNet.QuanLyDoAn;
 import Case.QuanLyNet.QuanLyNguoiDung;
+import Case.Run.Run;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,10 +18,11 @@ public class XuatHoaDon {
 
     QuanLyDoAn quanLyDoAn = new QuanLyDoAn();
     QuanLyNguoiDung quanLyNguoiDung = new QuanLyNguoiDung();
+    DinhDang dinhDang = new DinhDang();
    DocVietFileNhiPhan<HoaDon> hoaDonDocVietFileNhiPhan = new DocVietFileNhiPhan<>();
     ArrayList<HoaDon> hoaDons = hoaDonDocVietFileNhiPhan.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
 
-    public void MuaDoAn(String user, String pass) {
+    public void MuaDoAn() {
         boolean check = true;
         ArrayList<DichVu> dichVus = new ArrayList<>();
         DichVu dichVu;
@@ -27,7 +30,7 @@ public class XuatHoaDon {
         int choice;
         while (check){
             quanLyDoAn.Hien_Thi();
-            System.out.println("Bạn muốn mua món ?");
+            System.out.println("Bạn muốn mua món ?" + "\n" + "(Nhập số thứ tự để mua :#)");
             while (true) {
                 try {
                     choice = Integer.parseInt(scanner.nextLine());
@@ -53,15 +56,16 @@ public class XuatHoaDon {
             }
             System.out.println("Bạn muốn gọi thêm món khác không ? y/n");
             String x = scanner.nextLine();
-            if (!x.equals("y")) {
+
+            if (dinhDang.Yes_or_No(x)) {
                 check = false;
             }
         }
-        HoaDon hoaDon = new HoaDon(LocalDateTime.now(),dichVus, soluong, user);
+        HoaDon hoaDon = new HoaDon(LocalDateTime.now(),dichVus, soluong, Run.user.getTen_Dang_Nhap());
         System.out.println(hoaDon);
         hoaDons.add(hoaDon);
         hoaDonDocVietFileNhiPhan.write(hoaDons,"C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
-        quanLyNguoiDung.TruTien(user, pass, hoaDon.Tongtien());
+        quanLyNguoiDung.TruTien(Run.user.getTen_Dang_Nhap(), Run.user.getMat_Khau(), hoaDon.Tongtien());
 
     }
     public void TongTien(){

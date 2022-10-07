@@ -11,7 +11,7 @@ public class DinhDang {
         if (matcher.find()) {
             return str.substring(matcher.start(), matcher.end());
         } else {
-            System.out.println("Sai định dạng " + "Ví dụ: vanan@gmail.com");
+            System.out.println("Sai định dạng " + "Ví dụ: Vanan@gmail.com");
             return null;
         }
     }
@@ -24,6 +24,15 @@ public class DinhDang {
         } else {
             System.out.println("Sai định dạng " + "an0607");
             return null;
+        }
+    }
+    public boolean Yes_or_No(String str){
+        Pattern parameter = Pattern.compile("[Yy]");
+        Matcher matcher = parameter.matcher(str);
+        if (matcher.find()) {
+            return false;
+        } else {
+            return true;
         }
     }
 }
