@@ -28,7 +28,6 @@ public class RunAdmin extends Thread{
     static {
         try {
             socket = sever.accept();
-            System.out.println("Khách vùa đăng nhập!");
         } catch (IOException e) {
             e.printStackTrace();
         }
