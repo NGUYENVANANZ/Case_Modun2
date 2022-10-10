@@ -6,8 +6,9 @@ import java.util.regex.Pattern;
 public class DinhDang {
 
     public String DinhDang_KyUser(String str) {
-        Pattern parameter = Pattern.compile("^[A-Z]+[\\w]{3,}@([a-z]+\\.+[a-z]+)$");
+        Pattern parameter = Pattern.compile("^[A-Z]+[\\w]{3,}@gmail\\.com$");
         Matcher matcher = parameter.matcher(str);
+
         if (matcher.find()) {
             return str.substring(matcher.start(), matcher.end());
         } else {
@@ -27,7 +28,7 @@ public class DinhDang {
         }
     }
     public boolean Yes_or_No(String str){
-        Pattern parameter = Pattern.compile("[Yy]");
+        Pattern parameter = Pattern.compile("^[Yy]");
         Matcher matcher = parameter.matcher(str);
         if (matcher.find()) {
             return false;

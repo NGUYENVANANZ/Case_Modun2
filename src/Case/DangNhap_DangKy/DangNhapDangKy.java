@@ -29,17 +29,16 @@ public class DangNhapDangKy extends Thread {
         while (true){
             System.out.println(
                     """
-                            =================================
+                            ==============(HELLO-USER)==================
                             1. Đăng Nhập
                             2. Đăng Ký
-                            3. Thoát
                             ================================="""
             );
             int choice = 0;
-            while (choice > 3 || choice < 1)
+            while (choice > 2 || choice < 1)
                 try {
                     choice = Integer.parseInt(scanner.nextLine());
-                    if (choice > 3 || choice < 1) {
+                    if (choice > 2 || choice < 1) {
                         System.out.println("Vui lòng chọn từ 1 -> 3");
                     }
                 } catch (NumberFormatException e) {
@@ -48,7 +47,6 @@ public class DangNhapDangKy extends Thread {
             switch (choice) {
                 case 1 -> Dang_Nhap();
                 case 2 -> Dang_Ky();
-                case 3 -> System.exit(0);
             }
         }
 
@@ -56,7 +54,7 @@ public class DangNhapDangKy extends Thread {
 
 
     public void Dang_Nhap() {
-        System.out.println("==============(!LOGIN!)==================");
+        System.out.println("==============(!LOGIN-USER)==================");
             System.out.println("Nhập userName :");
             String username = scanner.nextLine();
             System.out.println("Nhập passWord");
