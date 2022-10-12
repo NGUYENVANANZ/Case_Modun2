@@ -75,10 +75,10 @@ public class QuanLyDoAn {
         System.out.println("Nhập Món");
         do {
             tenMon = scanner.nextLine();
-            if (XetTrungSanPham(tenMon) == -1){
+            if (XetTrungSanPham(tenMon) == -1) {
                 System.out.println("Đã có trong menu");
             }
-        }while (XetTrungSanPham(tenMon) == -1);
+        } while (XetTrungSanPham(tenMon) == -1);
 
         System.out.println("Nhập Giá");
         while (true) {
@@ -113,7 +113,7 @@ public class QuanLyDoAn {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (0 < choice && choice < do_an_quan_nets.size() + 1) {
                     break;
-                }else {
+                } else {
                     System.out.println("Không có món này !");
                 }
 
@@ -125,10 +125,17 @@ public class QuanLyDoAn {
         int index = choice - 1;
         double gia;
         int soluong;
+        String mon;
         for (int i = 0; i < do_an_quan_nets.size(); i++) {
             if (i == index) {
                 System.out.println("Nhập Món");
-                String mon = scanner.nextLine();
+                do {
+                    mon = scanner.nextLine();
+                    if (XetTrungSanPham(mon) == -1) {
+                        System.out.println("Đã có trong menu");
+                    }
+                } while (XetTrungSanPham(mon) == -1);
+
                 System.out.println("Nhập Giá");
                 while (true) {
                     try {
@@ -165,7 +172,7 @@ public class QuanLyDoAn {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (0 < choice && choice < do_an_quan_nets.size() + 1) {
                     break;
-                }else {
+                } else {
                     System.out.println("Không có món này !");
                 }
 
@@ -193,7 +200,7 @@ public class QuanLyDoAn {
         docVietFile.write(do_an_quan_nets, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
     }
 
-    public int XetTrungSanPham(String name){
+    public int XetTrungSanPham(String name) {
         do_an_quan_nets = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
         for (DichVu x : do_an_quan_nets) {
             if (x.getTen_Mon_An().equals(name)) {

@@ -53,11 +53,15 @@ public class XuatHoaDon {
                     System.out.println("Vui lòng nhập số !");
                 }
             }
+            double checkgia;
             System.out.println("Số lượng");
             while (true) {
                 try {
                     do {
-                        soluong = Integer.parseInt(scanner.nextLine());
+                        do {
+                            soluong = Integer.parseInt(scanner.nextLine());
+                            checkgia = quanLyDoAn.getDo_an_quan_nets().get(choice-1).getGia()*soluong;
+                        }while (!quanLyNguoiDung.CheckTienTaiKhoan(RunUser.user.getTen_Dang_Nhap(), RunUser.user.getMat_Khau(),checkgia));
                     } while (!TruSoLuong(soluong, quanLyDoAn.getDo_an_quan_nets().get(choice - 1).getTen_Mon_An()));
                     break;
                 } catch (NumberFormatException e) {
@@ -109,10 +113,11 @@ public class XuatHoaDon {
                     quanLyDoAn.getDo_an_quan_nets().get(i).setSoLuong(new_soluong);
                     quanLyDoAn.getDocVietFile().write(quanLyDoAn.getDo_an_quan_nets(), "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
                     return true;
+                }else {
+                    System.out.println("Hết hàng !");
                 }
             }
         }
         return false;
     }
-
 }

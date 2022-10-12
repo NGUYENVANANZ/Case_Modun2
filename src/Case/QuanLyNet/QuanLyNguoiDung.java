@@ -12,6 +12,8 @@ public class QuanLyNguoiDung {
     Scanner scanner = new Scanner(System.in);
     DocVietFileNhiPhan<NguoiDUng> docVietFile = new DocVietFileNhiPhan<>();
     DinhDang dinhDang = new DinhDang();
+
+    QuanLyDoAn quanLyDoAn = new QuanLyDoAn();
     ArrayList<NguoiDUng> nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
 
 
@@ -106,6 +108,9 @@ public class QuanLyNguoiDung {
         nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
         int choice;
         System.out.println("Bạn muốn xóa tài khoản nào?");
+
+
+
         while (true) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -239,8 +244,20 @@ public class QuanLyNguoiDung {
                 }
             }
         }
-
         docVietFile.write(nguoiDUngs, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
+    }
+    public boolean CheckTienTaiKhoan(String user, String pass, double sum) {
+        nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
+        for (NguoiDUng x : nguoiDUngs) {
+            if (x.getTen_Dang_Nhap().equals(user) && x.getMat_Khau().equals(pass)) {
+                double Tien_Trong_Tai_Khoan = x.getTien_Trong_Tai_Khoan() - sum;
+                if (Tien_Trong_Tai_Khoan < 0) {
+                    System.out.println("Không thể thực hiện giao dịch");
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 
