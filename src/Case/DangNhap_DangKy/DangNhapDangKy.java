@@ -60,7 +60,7 @@ public class DangNhapDangKy extends Thread {
             System.out.println("Nhập passWord");
             String pass = scanner.nextLine();
 
-                if (quanLyNguoiDung.checkNguoiDung(username, pass)) {
+            if (quanLyNguoiDung.checkNguoiDung(username, pass)) {
                     System.out.println("Đăng nhập thành công !");
                     RunUser.user.setTen_Dang_Nhap(username);
                     RunUser.user.setMat_Khau(pass);

@@ -161,7 +161,7 @@ public class QuanLyNguoiDung {
                 System.out.println("Nhập lại !");
             }
         } while (pass == null);
-        NguoiDUng nguoiDUng = new NguoiDUng(user, pass, 1000);
+        NguoiDUng nguoiDUng = new NguoiDUng(user, pass, 10000);
         nguoiDUngs.add(nguoiDUng);
         docVietFile.write(nguoiDUngs, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
     }
@@ -199,7 +199,7 @@ public class QuanLyNguoiDung {
                 check = false;
             }
         }
-        NguoiDUng nguoiDUng = new NguoiDUng(user, pass, 1000);
+        NguoiDUng nguoiDUng = new NguoiDUng(user, pass, 0);
         nguoiDUngs.add(nguoiDUng);
         docVietFile.write(nguoiDUngs, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
     }
