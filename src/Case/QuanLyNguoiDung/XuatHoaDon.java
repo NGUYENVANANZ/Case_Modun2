@@ -33,6 +33,7 @@ public class XuatHoaDon {
         DichVu dichVu;
         int soluong = 0;
         int choice = 0;
+        HoaDon hoaDon = new HoaDon();
         while (check) {
             quanLyDoAn.Hien_Thi();
             System.out.println("Bạn muốn mua món ?" + "\n" + "(Nhập số thứ tự để mua :#)");
@@ -70,6 +71,9 @@ public class XuatHoaDon {
             }
             dichVu = new DichVu(quanLyDoAn.getDo_an_quan_nets().get(choice - 1).getTen_Mon_An(), quanLyDoAn.getDo_an_quan_nets().get(choice - 1).getGia(), soluong);
             dichVus.add(dichVu);
+            hoaDon = new HoaDon(LocalDateTime.now(), dichVus, soluong, RunUser.user.getTen_Dang_Nhap());
+            hoaDons.add(hoaDon);
+            quanLyNguoiDung.TruTien(RunUser.user.getTen_Dang_Nhap(), RunUser.user.getMat_Khau(), hoaDon.Tongtien());
             System.out.println("Bạn muốn gọi thêm món khác không ?");
             System.out.println("Nhấn y để mua thêm !");
             String x = scanner.nextLine();
@@ -78,11 +82,9 @@ public class XuatHoaDon {
                 check = false;
             }
         }
-        HoaDon hoaDon = new HoaDon(LocalDateTime.now(), dichVus, soluong, RunUser.user.getTen_Dang_Nhap());
         System.out.println(hoaDon);
-        hoaDons.add(hoaDon);
         hoaDonDocVietFileNhiPhan.write(hoaDons, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
-        quanLyNguoiDung.TruTien(RunUser.user.getTen_Dang_Nhap(), RunUser.user.getMat_Khau(), hoaDon.Tongtien());
+        
 
     }
 
