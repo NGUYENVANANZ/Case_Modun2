@@ -21,9 +21,9 @@ public class XuatHoaDon {
     DinhDang dinhDang = new DinhDang();
 
 
-   DocVietFileNhiPhan<HoaDon> hoaDonDocVietFileNhiPhan = new DocVietFileNhiPhan<>();
-    ArrayList<HoaDon> hoaDons = hoaDonDocVietFileNhiPhan.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
+    DocVietFileNhiPhan<HoaDon> hoaDonDocVietFileNhiPhan = new DocVietFileNhiPhan<>();
 
+    ArrayList<HoaDon> hoaDons = hoaDonDocVietFileNhiPhan.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
 
 
     public void MuaDoAn() {
@@ -33,23 +33,21 @@ public class XuatHoaDon {
         DichVu dichVu;
         int soluong = 0;
         int choice = 0;
-        while (check){
+        while (check) {
             quanLyDoAn.Hien_Thi();
             System.out.println("Bạn muốn mua món ?" + "\n" + "(Nhập số thứ tự để mua :#)");
             while (true) {
 
                 try {
                     choice = Integer.parseInt(scanner.nextLine());
-                    if (choice == 0){
+                    if (choice == 0) {
                         MenuNguoiDung.menuNguoiDung = new MenuNguoiDung();
                         MenuNguoiDung.menuNguoiDung.Menu();
                     }
-                    if (choice > 0 && choice <= quanLyDoAn.getDo_an_quan_nets().size()+1) {
-                        dichVu = new DichVu(quanLyDoAn.getDo_an_quan_nets().get(choice-1).getTen_Mon_An(), quanLyDoAn.getDo_an_quan_nets().get(choice-1).getGia());
-                        dichVus.add(dichVu);
-                        break;
-                    } else {
+                    if (choice < 0 && choice > quanLyDoAn.getDo_an_quan_nets().size() + 1) {
                         System.out.println("Không có món này !");
+                    } else {
+                        break;
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Vui lòng nhập số !");
@@ -58,42 +56,63 @@ public class XuatHoaDon {
             System.out.println("Số lượng");
             while (true) {
                 try {
-                    soluong = Integer.parseInt(scanner.nextLine());
+                    do {
+                        soluong = Integer.parseInt(scanner.nextLine());
+                    } while (!TruSoLuong(soluong, quanLyDoAn.getDo_an_quan_nets().get(choice - 1).getTen_Mon_An()));
                     break;
                 } catch (NumberFormatException e) {
                     System.out.println("Vui lòng nhập số");
                 }
             }
+            dichVu = new DichVu(quanLyDoAn.getDo_an_quan_nets().get(choice - 1).getTen_Mon_An(), quanLyDoAn.getDo_an_quan_nets().get(choice - 1).getGia(), soluong);
+            dichVus.add(dichVu);
             System.out.println("Bạn muốn gọi thêm món khác không ?");
-            System.out.println("Nhấn y để thay đổi !");
+            System.out.println("Nhấn y để mua thêm !");
             String x = scanner.nextLine();
 
             if (dinhDang.Yes_or_No(x)) {
                 check = false;
             }
         }
-        HoaDon hoaDon = new HoaDon(LocalDateTime.now(),dichVus, soluong, RunUser.user.getTen_Dang_Nhap());
+        HoaDon hoaDon = new HoaDon(LocalDateTime.now(), dichVus, soluong, RunUser.user.getTen_Dang_Nhap());
         System.out.println(hoaDon);
         hoaDons.add(hoaDon);
-        hoaDonDocVietFileNhiPhan.write(hoaDons,"C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
+        hoaDonDocVietFileNhiPhan.write(hoaDons, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
         quanLyNguoiDung.TruTien(RunUser.user.getTen_Dang_Nhap(), RunUser.user.getMat_Khau(), hoaDon.Tongtien());
 
     }
-    public void TongTien(){
+
+    public void TongTien() {
         hoaDons = hoaDonDocVietFileNhiPhan.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
         double sum = TinhTienMay();
-        for (HoaDon x:hoaDons) {
+        for (HoaDon x : hoaDons) {
             sum += x.Tongtien();
         }
         System.out.println("Tổng doanh thu :" + sum);
     }
-    public double TinhTienMay(){
+
+    public double TinhTienMay() {
         quanLyNguoiDung = new QuanLyNguoiDung();
         double sum = 0;
-        for (NguoiDUng x: quanLyNguoiDung.getNguoiDUngs()) {
+        for (NguoiDUng x : quanLyNguoiDung.getNguoiDUngs()) {
             sum += x.getTien_Trong_Tai_Khoan();
         }
         return sum;
+    }
+
+    public boolean TruSoLuong(int soluong, String name) {
+        int new_soluong;
+        for (int i = 0; i < quanLyDoAn.getDo_an_quan_nets().size(); i++) {
+            if (quanLyDoAn.getDo_an_quan_nets().get(i).getTen_Mon_An().equals(name)) {
+                new_soluong = quanLyDoAn.getDo_an_quan_nets().get(i).getSoLuong() - soluong;
+                if (new_soluong >= 0) {
+                    quanLyDoAn.getDo_an_quan_nets().get(i).setSoLuong(new_soluong);
+                    quanLyDoAn.getDocVietFile().write(quanLyDoAn.getDo_an_quan_nets(), "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

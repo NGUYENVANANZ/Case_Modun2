@@ -14,8 +14,9 @@ public class QuanLyDoAn {
     DinhDang dinhDang = new DinhDang();
     ArrayList<DichVu> do_an_quan_nets = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
 
-
-
+    public DocVietFileNhiPhan<DichVu> getDocVietFile() {
+        return docVietFile;
+    }
 
     public ArrayList<DichVu> getDo_an_quan_nets() {
         return do_an_quan_nets;
@@ -70,6 +71,7 @@ public class QuanLyDoAn {
         do_an_quan_nets = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
         double gia;
         String tenMon;
+        int soLuong;
         System.out.println("Nhập Món");
         do {
             tenMon = scanner.nextLine();
@@ -87,9 +89,18 @@ public class QuanLyDoAn {
                 System.out.println("Vui lòng nhập số");
             }
         }
+        System.out.println("Nhập Số Lượng");
+        while (true) {
+            try {
+                soLuong = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Vui lòng nhập số");
+            }
+        }
         System.out.println("Thêm món thành công !");
 
-        do_an_quan_nets.add(new DichVu(tenMon, gia));
+        do_an_quan_nets.add(new DichVu(tenMon, gia, soLuong));
         docVietFile.write(do_an_quan_nets, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
     }
 
@@ -113,6 +124,7 @@ public class QuanLyDoAn {
 
         int index = choice - 1;
         double gia;
+        int soluong;
         for (int i = 0; i < do_an_quan_nets.size(); i++) {
             if (i == index) {
                 System.out.println("Nhập Món");
@@ -126,7 +138,16 @@ public class QuanLyDoAn {
                         System.out.println("Vui lòng nhập số");
                     }
                 }
-                DichVu doAnQuanNet = new DichVu(mon, gia);
+                System.out.println("Nhập Số Lượng");
+                while (true) {
+                    try {
+                        soluong = Integer.parseInt(scanner.nextLine());
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Vui lòng nhập số");
+                    }
+                }
+                DichVu doAnQuanNet = new DichVu(mon, gia, soluong);
                 do_an_quan_nets.set(i, doAnQuanNet);
             }
         }
