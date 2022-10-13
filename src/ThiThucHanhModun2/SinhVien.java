@@ -1,6 +1,8 @@
 package ThiThucHanhModun2;
 
-public class SinhVien {
+import java.io.Serializable;
+
+public class SinhVien implements Serializable {
     private String maSinhVien;
     private String hoVaTen;
     private int tuoi;

@@ -19,7 +19,24 @@ public class Menu {
                     "7. Ghi vào file\n" +
                     "8. Thoát \n" +
                     "Nhập lựa chọn của bạn: ");
-            int choice = Integer.parseInt(scanner.nextLine());
+
+            int choice = 0;
+            while (true){
+                try {
+                    do {
+                        choice = Integer.parseInt(scanner.nextLine());
+                        if (choice < 1 || choice > 8){
+                            System.out.println("VUI LÒNG CHỌN TỪ 1 -> 8");
+                        }
+                    }while (choice < 1 || choice > 8);
+
+                    break;
+                }catch (NumberFormatException e){
+                    System.out.println("VUI LÒNG NHẬP SỐ !");
+                }
+            }
+
+
             switch (choice) {
                 case 1 -> quanLySinhVien.hienThi();
                 case 2 -> quanLySinhVien.themSinhVien();
@@ -31,6 +48,6 @@ public class Menu {
                 case 8 -> check = false;
             }
         }
-
+        System.out.println("Cảm Mơn Quý Khách !");
     }
 }
