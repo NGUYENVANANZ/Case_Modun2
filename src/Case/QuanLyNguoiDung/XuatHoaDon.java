@@ -34,6 +34,7 @@ public class XuatHoaDon {
         int soluong = 0;
         int choice = 0;
         HoaDon hoaDon = new HoaDon();
+        double tongTienTru = 0;
         while (check) {
             quanLyDoAn.Hien_Thi();
             System.out.println("Bạn muốn mua món ?" + "\n" + "(Nhập số thứ tự để mua :#)");
@@ -61,30 +62,37 @@ public class XuatHoaDon {
                     do {
                         do {
                             soluong = Integer.parseInt(scanner.nextLine());
-                            checkgia = quanLyDoAn.getDo_an_quan_nets().get(choice-1).getGia()*soluong;
-                        }while (!quanLyNguoiDung.CheckTienTaiKhoan(RunUser.user.getTen_Dang_Nhap(), RunUser.user.getMat_Khau(),checkgia));
+                            checkgia = quanLyDoAn.getDo_an_quan_nets().get(choice - 1).getGia() * soluong;
+                        } while (!quanLyNguoiDung.CheckTienTaiKhoan(RunUser.user.getTen_Dang_Nhap(), RunUser.user.getMat_Khau(), checkgia));
                     } while (!TruSoLuong(soluong, quanLyDoAn.getDo_an_quan_nets().get(choice - 1).getTen_Mon_An()));
                     break;
                 } catch (NumberFormatException e) {
                     System.out.println("Vui lòng nhập số");
                 }
             }
+
             dichVu = new DichVu(quanLyDoAn.getDo_an_quan_nets().get(choice - 1).getTen_Mon_An(), quanLyDoAn.getDo_an_quan_nets().get(choice - 1).getGia(), soluong);
             dichVus.add(dichVu);
-            hoaDon = new HoaDon(LocalDateTime.now(), dichVus, soluong, RunUser.user.getTen_Dang_Nhap());
-            hoaDons.add(hoaDon);
-            quanLyNguoiDung.TruTien(RunUser.user.getTen_Dang_Nhap(), RunUser.user.getMat_Khau(), hoaDon.Tongtien());
             System.out.println("Bạn muốn gọi thêm món khác không ?");
             System.out.println("Nhấn y để mua thêm !");
             String x = scanner.nextLine();
-
             if (dinhDang.Yes_or_No(x)) {
                 check = false;
             }
+            tongTienTru += dichVu.getGia()*dichVu.getSoLuong();
+            if (!quanLyNguoiDung.CheckTienTaiKhoan(RunUser.user.getTen_Dang_Nhap(), RunUser.user.getMat_Khau(), tongTienTru)){
+                check = false;
+            }
         }
+        hoaDon = new HoaDon(LocalDateTime.now(), dichVus, soluong, RunUser.user.getTen_Dang_Nhap());
         System.out.println(hoaDon);
+        quanLyNguoiDung.TruTien(RunUser.user.getTen_Dang_Nhap(), RunUser.user.getMat_Khau(), tongTienTru);
+
+        hoaDons.add(hoaDon);
+
+
         hoaDonDocVietFileNhiPhan.write(hoaDons, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\hoaDonAll.txt");
-        
+
 
     }
 
@@ -115,7 +123,7 @@ public class XuatHoaDon {
                     quanLyDoAn.getDo_an_quan_nets().get(i).setSoLuong(new_soluong);
                     quanLyDoAn.getDocVietFile().write(quanLyDoAn.getDo_an_quan_nets(), "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\doAn.txt");
                     return true;
-                }else {
+                } else {
                     System.out.println("Hết hàng !");
                 }
             }

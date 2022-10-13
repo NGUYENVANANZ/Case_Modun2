@@ -110,7 +110,6 @@ public class QuanLyNguoiDung {
         System.out.println("Bạn muốn xóa tài khoản nào?");
 
 
-
         while (true) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -246,17 +245,19 @@ public class QuanLyNguoiDung {
         }
         docVietFile.write(nguoiDUngs, "C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
     }
+
     public boolean CheckTienTaiKhoan(String user, String pass, double sum) {
         nguoiDUngs = docVietFile.reader("C:\\C0722G1\\Case_Modun_2\\src\\Case\\File\\Nguoidung.txt");
         for (NguoiDUng x : nguoiDUngs) {
             if (x.getTen_Dang_Nhap().equals(user) && x.getMat_Khau().equals(pass)) {
                 double Tien_Trong_Tai_Khoan = x.getTien_Trong_Tai_Khoan() - sum;
                 if (Tien_Trong_Tai_Khoan < 0) {
-                    System.out.println("Không thể thực hiện giao dịch");
+                    System.out.println("Tài khoản không đủ tiền");
                     return false;
                 }
             }
         }
+
         return true;
     }
 
